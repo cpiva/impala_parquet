@@ -1,0 +1,15 @@
+CREATE EXTERNAL TABLE sales_csv(usergender string, usercity string, usersentiment int, zipcode string, sku string, createdat string, category string, price float, county string, countycode string, userstate string, categorygroup string) ROW FORMAT
+DELIMITED FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n' 
+STORED AS TEXTFILE
+LOCATION '/user/cloudera/sales';
+
+CREATE TABLE sales_parquet (usergender string, usercity string, usersentiment int, zipcode string, sku string, createdat string, category string, price float, county string, countycode string, userstate string, categorygroup string) STORED AS parquetfile;
+
+INSERT INTO sales_parquet select * from sales_csv;
+
+
+
+
+
+
