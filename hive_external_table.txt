@@ -2,11 +2,13 @@ CREATE EXTERNAL TABLE sales_csv(usergender string, usercity string, usersentimen
 DELIMITED FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n' 
 STORED AS TEXTFILE
-LOCATION '/user/cloudera/sales';
+LOCATION '/user/cloudera/sales_csv';
 
-CREATE TABLE sales_parquet (usergender string, usercity string, usersentiment int, zipcode string, sku string, createdat string, category string, price float, county string, countycode string, userstate string, categorygroup string) STORED AS parquetfile;
+CREATE EXTERNAL TABLE sales_parquet(usergender string, usercity string, usersentiment int, zipcode string, sku string, createdat string, category string, price float, county string, countycode string, userstate string, categorygroup string)
+STORED AS parquetfile 
+LOCATION '/user/cloudera/sales_parquet';
 
-INSERT INTO sales_parquet select * from sales_csv;
+INSERT INTO TABLE sales_parquet select * from sales_csv;
 
 
 
